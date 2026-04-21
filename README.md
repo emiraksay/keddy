@@ -19,7 +19,7 @@
 
 ---
 
-Every agentic session leaves a JSONL trail — plans iterated, files touched, paths tried. You *can* dig through it. It costs hours, burns tokens, and the answer usually isn't right. Keddy captures every session automatically and turns it into an index you and your agent can actually use.
+Every agentic session leaves a JSONL trail. Endless possibilities inside each exchange. You *can* dig through it. It costs hours, burns tokens, and the answer usually isn't right. Keddy turns every session into structured history you and your agent can pull from.
 
 - Your agent reaches back in through **MCP tools** — any past session, plan, or file history, pulled on demand without re-explaining.
 - You reach back through a **local dashboard** — timelines, plan versions, and milestones, all in your browser at `localhost:3737`.
