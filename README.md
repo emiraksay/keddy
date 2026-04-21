@@ -23,7 +23,7 @@ Every agentic session leaves a JSONL trail. Endless possibilities inside each ex
 
 - Your agent reaches back in through **MCP tools** — any past session, plan, or file history, pulled on demand without re-explaining.
 - You reach back through a **local dashboard** — timelines, plan versions, and milestones, all in your browser at `localhost:3737`.
-- **Nothing leaves your machine.** No telemetry, no cloud sync; optional AI analysis uses your own API key.
+- **Nothing leaves your machine.** No telemetry, no cloud sync; optional AI agents use your own API key.
 
 ## How Keddy Works
 
