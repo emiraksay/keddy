@@ -13,10 +13,8 @@
 
 <p align="center">
   <a href="https://www.npmjs.com/package/keddy"><img src="https://img.shields.io/npm/v/keddy.svg?style=flat-square" alt="npm"></a>
+  <a href="LICENSE"><img src="https://img.shields.io/badge/license-Apache--2.0-blue.svg?style=flat-square" alt="License"></a>
   <a href="https://github.com/emireaksay-8867/keddy/actions/workflows/ci.yml"><img src="https://img.shields.io/github/actions/workflow/status/emireaksay-8867/keddy/ci.yml?style=flat-square&label=ci" alt="CI"></a>
-  <a href="LICENSE"><img src="https://img.shields.io/badge/license-Apache--2.0-black?style=flat-square" alt="License"></a>
-  <a href="https://www.npmjs.com/package/keddy"><img src="https://img.shields.io/npm/dm/keddy.svg?style=flat-square" alt="Downloads"></a>
-  <img src="https://img.shields.io/badge/status-pre--1.0-yellow?style=flat-square" alt="Status: pre-1.0">
 </p>
 
 ---
