@@ -28,6 +28,28 @@ app.use("*", async (c, next) => {
   await next();
 });
 
+// Security: CSRF protection — require Origin/Referer from localhost on state-changing requests
+app.use("/api/*", async (c, next) => {
+  const method = c.req.method;
+  if (method === "GET" || method === "HEAD" || method === "OPTIONS") {
+    await next();
+    return;
+  }
+  const origin = c.req.header("origin") || c.req.header("referer");
+  if (!origin) {
+    return c.text("Forbidden: missing Origin/Referer", 403);
+  }
+  try {
+    const url = new URL(origin);
+    if (!ALLOWED_HOSTS.has(url.hostname)) {
+      return c.text("Forbidden: cross-origin request", 403);
+    }
+  } catch {
+    return c.text("Forbidden: invalid Origin/Referer", 403);
+  }
+  await next();
+});
+
 // Security: CORS — restrict to localhost origins only
 app.use("/api/*", cors({
   origin: (origin) => {

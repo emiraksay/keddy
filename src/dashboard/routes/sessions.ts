@@ -690,7 +690,8 @@ sessionsRoutes.get("/:id", (c) => {
   `).all(session.id);
 
   // For forked sessions, strip auto-generated "(Branch)"/"(Fork)" suffix
-  const forkExIdx = (session as any).fork_exchange_index as number | null;
+  const rawForkExIdx = (session as any).fork_exchange_index;
+  const forkExIdx: number | null = Number.isInteger(rawForkExIdx) ? rawForkExIdx : null;
   if (session.title && /\((?:Fork|Branch)(?:\s*\d*)?\)\s*$/.test(session.title)) {
     (session as any).title = session.title.replace(/\s*\S?\s*\((?:Fork|Branch)(?:\s*\d*)?\)\s*$/, "").trim();
   }
@@ -712,6 +713,7 @@ sessionsRoutes.get("/:id", (c) => {
       cwd: session.project_path,
       encoding: "utf8",
       timeout: 3000,
+      env: { ...process.env, GIT_CONFIG_NOSYSTEM: "1", GIT_CONFIG_GLOBAL: "/dev/null" },
     }).trim();
     const ghRepo = parseGitRemote(remoteUrl);
     if (ghRepo) {
@@ -731,13 +733,12 @@ sessionsRoutes.get("/:id", (c) => {
   // Test status — final state only (last test milestone, fork-filtered)
   let testStatus: { passing: boolean; description: string; exchange_index: number } | null = null;
   try {
-    const forkTestFilter = forkExIdx != null ? `AND exchange_index >= ${forkExIdx}` : "";
     const lastTest = db.prepare(`
       SELECT milestone_type, description, exchange_index
       FROM milestones WHERE session_id = ? AND milestone_type IN ('test_pass', 'test_fail')
-      ${forkTestFilter}
+      AND (? IS NULL OR exchange_index >= ?)
       ORDER BY exchange_index DESC LIMIT 1
-    `).get(session.id) as any;
+    `).get(session.id, forkExIdx, forkExIdx) as any;
     if (lastTest) {
       testStatus = {
         passing: lastTest.milestone_type === "test_pass",
@@ -865,17 +866,15 @@ sessionsRoutes.get("/:id", (c) => {
   // File operations (for forked sessions, only show post-fork file ops)
   let fileOperations: Array<{ file_path: string; short_name: string; reads: number; edits: number; writes: number }> = [];
   try {
-    const forkFilter = forkExIdx != null
-      ? `AND tc.exchange_id IN (SELECT id FROM exchanges WHERE session_id = tc.session_id AND exchange_index >= ${forkExIdx})`
-      : "";
     const rows = db.prepare(`
       SELECT tc.file_path,
         SUM(CASE WHEN tc.tool_name IN ('Read', 'Grep', 'Glob') THEN 1 ELSE 0 END) as reads,
         SUM(CASE WHEN tc.tool_name = 'Edit' THEN 1 ELSE 0 END) as edits,
         SUM(CASE WHEN tc.tool_name = 'Write' THEN 1 ELSE 0 END) as writes
-      FROM tool_calls tc WHERE tc.session_id = ? AND tc.file_path IS NOT NULL ${forkFilter}
+      FROM tool_calls tc WHERE tc.session_id = ? AND tc.file_path IS NOT NULL
+        AND (? IS NULL OR tc.exchange_id IN (SELECT id FROM exchanges WHERE session_id = tc.session_id AND exchange_index >= ?))
       GROUP BY tc.file_path ORDER BY (edits + writes) DESC, reads DESC
-    `).all(session.id) as any[];
+    `).all(session.id, forkExIdx, forkExIdx) as any[];
     fileOperations = rows.map((r: any) => ({
       ...r,
       short_name: r.file_path.split("/").pop() || r.file_path,

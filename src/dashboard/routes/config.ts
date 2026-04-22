@@ -17,9 +17,32 @@ configRoutes.get("/config", (c) => {
 configRoutes.put("/config", async (c) => {
   const body = await c.req.json();
   const current = loadConfig();
+
+  // Validate analysis.baseUrl if provided: must be http(s) and not target link-local/metadata addresses.
+  if (body?.analysis?.baseUrl !== undefined && body.analysis.baseUrl !== null && body.analysis.baseUrl !== "") {
+    try {
+      const u = new URL(body.analysis.baseUrl);
+      if (u.protocol !== "http:" && u.protocol !== "https:") {
+        return c.json({ error: "analysis.baseUrl must use http or https" }, 400);
+      }
+      if (u.hostname === "169.254.169.254" || u.hostname === "metadata.google.internal") {
+        return c.json({ error: "analysis.baseUrl host is not allowed" }, 400);
+      }
+    } catch {
+      return c.json({ error: "analysis.baseUrl is not a valid URL" }, 400);
+    }
+  }
+
+  // Allowlist top-level keys to avoid writing arbitrary attacker-chosen fields into config.json.
+  const allowedTop = new Set(["analysis", "notes"]);
+  const filteredBody: Record<string, unknown> = {};
+  for (const [k, v] of Object.entries(body ?? {})) {
+    if (allowedTop.has(k)) filteredBody[k] = v;
+  }
+
   const merged = {
     ...current,
-    ...body,
+    ...filteredBody,
     analysis: { ...current.analysis, ...(body.analysis ?? {}) },
     notes: { ...current.notes, ...(body.notes ?? {}) },
   };

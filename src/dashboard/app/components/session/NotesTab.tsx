@@ -26,6 +26,7 @@ export function MermaidDiagram({ chart, compact }: { chart: string; compact?: bo
       if (configKey !== lastInitConfig) {
         mermaid.initialize({
           startOnLoad: false,
+          securityLevel: "strict",
           theme: "dark",
           themeVariables: {
             primaryColor: "#6366f1",
@@ -42,7 +43,7 @@ export function MermaidDiagram({ chart, compact }: { chart: string; compact?: bo
             edgeLabelBackground: "#18181b",
             nodeTextColor: "#fafafa",
           },
-          flowchart: { htmlLabels: true, curve: "basis", padding },
+          flowchart: { htmlLabels: false, curve: "basis", padding },
           fontFamily: "'Geist', system-ui, sans-serif",
           fontSize,
         });
