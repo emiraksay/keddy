@@ -32,16 +32,7 @@ Every agentic session leaves a JSONL trail. Endless possibilities inside each ex
   <img src="docs/assets/architecture-v3-light.svg" alt="Keddy architecture" width="100%">
 </picture>
 
-Four Claude Code hooks feed a local session reader that parses the transcript and writes to a SQLite database on your machine. The database serves two surfaces: MCP tools Claude can call to pull context, and a dashboard you open in your browser to review sessions visually.
-
-| Hook | Timing | What it captures |
-|---|---|---|
-| `SessionStart` | Sync, fires when a session begins | Session record + returns past context for the project if any |
-| `Stop` | Async, fires after each turn | Latest exchange, tool calls, token counts, segment classification |
-| `PostCompact` | Async, fires when Claude compacts context | Compaction event with exchange deltas and optional summary |
-| `SessionEnd` | Async, fires when the session ends | Full transcript parse, plan versions, milestones, optional AI analysis |
-
-See [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md) for the deeper technical breakdown.
+Four Claude Code hooks feed a local session reader that parses the transcript and writes to a SQLite database on your machine. The database serves two surfaces: MCP tools Claude can call to pull context, and a dashboard you open in your browser to review sessions visually. See [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md) for the deeper technical breakdown.
 
 ## Quick start
 
