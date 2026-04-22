@@ -71,12 +71,16 @@
   <text x="1265" y="494" text-anchor="middle" class="label label-box">MCP Server</text>
   <g class="tool-list">
     <text x="1075" y="555">keddy_search_sessions</text>
-    <text x="1075" y="595">keddy_get_session</text>
-    <text x="1075" y="635">keddy_get_plans</text>
-    <text x="1075" y="675">keddy_recent_activity</text>
-    <text x="1075" y="715">keddy_get_transcript</text>
-    <text x="1075" y="755">keddy_search_by_file</text>
-    <text x="1075" y="795">keddy_project_status</text>
+    <text x="1075" y="583">keddy_get_session</text>
+    <text x="1075" y="611">keddy_get_plans</text>
+    <text x="1075" y="639">keddy_recent_activity</text>
+    <text x="1075" y="667">keddy_get_transcript</text>
+    <text x="1075" y="695">keddy_search_by_file</text>
+    <text x="1075" y="723">keddy_project_status</text>
+    <text x="1075" y="751">keddy_get_session_skeleton</text>
+    <text x="1075" y="779">keddy_transcript_summary</text>
+    <text x="1075" y="807">keddy_get_session_note</text>
+    <text x="1075" y="835">keddy_get_daily_note</text>
   </g>
 
   <rect x="1530" y="450" width="450" height="410" rx="12" class="box"/>
@@ -89,5 +93,9 @@
     <text x="1755" y="740" text-anchor="middle">Session Notes</text>
     <text x="1755" y="790" text-anchor="middle">Daily Notes</text>
   </g>
+
+  <!-- ============ Dashboard notes <-> MCP note tools (cross-surface mapping) ============ -->
+  <path d="M 1530 740 L 1490 807" class="arrow" stroke-dasharray="4 4" marker-end="url(#arrowhead)"/>
+  <path d="M 1530 790 L 1490 835" class="arrow" stroke-dasharray="4 4" marker-end="url(#arrowhead)"/>
 
 </svg>
