@@ -95,7 +95,7 @@
   </g>
 
   <!-- ============ Dashboard notes <-> MCP note tools ============ -->
-  <path d="M 1530 740 L 1515 740 L 1515 807 L 1460 807" class="arrow" marker-end="url(#arrowhead)"/>
-  <path d="M 1530 790 L 1505 790 L 1505 835 L 1460 835" class="arrow" marker-end="url(#arrowhead)"/>
+  <path d="M 1660 740 L 1515 740 L 1515 807 L 1460 807" class="arrow" marker-end="url(#arrowhead)"/>
+  <path d="M 1660 790 L 1505 790 L 1505 835 L 1460 835" class="arrow" marker-end="url(#arrowhead)"/>
 
 </svg>
