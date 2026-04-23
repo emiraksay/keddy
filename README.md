@@ -30,7 +30,7 @@ Every agentic session leaves a JSONL trail. Endless possibilities inside each ex
   <img src="docs/assets/architecture-v3-light.svg" alt="Keddy architecture" width="100%">
 </picture>
 
-Four Claude Code hooks feed a local session reader that parses the transcript and writes to a SQLite database on your machine. The database serves two surfaces: MCP tools Claude can call to pull context, and a dashboard you open in your browser to review sessions visually. See [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md) for the deeper technical breakdown.
+Four Claude Code hooks feed a local session reader that parses the transcript and writes to a SQLite database on your machine. The database serves two surfaces: MCP tools Claude can call to pull context, and a dashboard you open in your browser to review sessions visually. See [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md) for the technical breakdown and [`docs/DECISIONS.md`](docs/DECISIONS.md) for design rationale.
 
 ## MCP tools
 
@@ -301,7 +301,7 @@ To force a complete re-import: `keddy reimport`.
 ## Development
 
 ```bash
-git clone https://github.com/emireaksay-8867/keddy.git
+git clone https://github.com/emiraksay/keddy.git
 cd keddy
 npm install
 
@@ -313,28 +313,14 @@ npm run dev           # Watch mode for CLI + dashboard + server
 
 See [`CONTRIBUTING.md`](CONTRIBUTING.md) for the full development workflow, PR process, and coding standards.
 
-## Architecture and decisions
-
-- [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md) — how the capture pipeline, database, MCP server, and dashboard fit together
-- [`docs/DECISIONS.md`](docs/DECISIONS.md) — why Keddy is session intelligence, not a memory layer; why programmatic detection over LLM classification; why local-first
-
-## Contributing
-
-Issues and pull requests are welcome. Start with [`CONTRIBUTING.md`](CONTRIBUTING.md), then browse the open issues — anything tagged `good first issue` is a good starting point.
-
-## Security
-
-Report vulnerabilities privately per [`SECURITY.md`](SECURITY.md). Do not open public issues for security problems.
-
 ## Acknowledgments
 
-Built on:
+Keddy wouldn't exist without:
 
-- [Claude Code](https://docs.claude.com/en/docs/claude-code/overview) — the hooks API makes this tool possible
-- [`@modelcontextprotocol/sdk`](https://github.com/modelcontextprotocol/typescript-sdk) — MCP server plumbing
-- [`better-sqlite3`](https://github.com/WiseLibs/better-sqlite3) — synchronous SQLite with FTS5
-- [Hono](https://hono.dev) — lightweight API server
-- [Vite](https://vitejs.dev) and [Tailwind CSS](https://tailwindcss.com) — dashboard tooling
+- [Claude Code](https://docs.claude.com/en/docs/claude-code/overview) — the hooks and MCP APIs that make every part of this possible.
+- [@modelcontextprotocol/sdk](https://github.com/modelcontextprotocol/typescript-sdk) — the TypeScript MCP library Keddy builds on.
+- [better-sqlite3](https://github.com/WiseLibs/better-sqlite3), [Hono](https://hono.dev), [Vite](https://vitejs.dev), and [Tailwind CSS](https://tailwindcss.com) — the fast, boring infrastructure that lets us focus on the interesting parts.
+- [Serena](https://github.com/oraios/serena) — the reference point for what a thoughtful open-source agent tool looks like.
 
 ## License
 
