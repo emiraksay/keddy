@@ -9,10 +9,10 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/emireaksay-8867/keddy.git"
+    "url": "git+https://github.com/emiraksay/keddy.git"
   },
-  "homepage": "https://github.com/emireaksay-8867/keddy#readme",
-  "bugs": "https://github.com/emireaksay-8867/keddy/issues",
+  "homepage": "https://github.com/emiraksay/keddy#readme",
+  "bugs": "https://github.com/emiraksay/keddy/issues",
   "keywords": [
     "claude-code",
     "session-intelligence",
