@@ -43,3 +43,7 @@ npm install
 ## Testing capture without a full Claude Code session
 
 The parser can be exercised directly against fixture JSONL files in `tests/fixtures/`. See `tests/capture/parser.test.ts` for examples — you don't need a running Claude Code session to test parsing logic.
+
+## Security issues
+
+See [docs/SECURITY.md](docs/SECURITY.md) — report privately, don't open a public issue.
