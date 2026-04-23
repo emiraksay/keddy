@@ -1,7 +1,7 @@
 {
   "name": "keddy",
-  "version": "0.1.0",
-  "description": "Session intelligence for Claude Code — navigable timelines, plan tracking, and past session search",
+  "version": "0.1.1",
+  "description": "Session intelligence for your coding agent.",
   "license": "Apache-2.0",
   "author": {
     "name": "Emir Enes Aksay",
