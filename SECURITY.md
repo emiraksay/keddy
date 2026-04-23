@@ -1,18 +1,39 @@
 # Security Policy
 
-## Reporting a Vulnerability
+## Reporting a vulnerability
 
-If you discover a security vulnerability, please report it responsibly:
+If you find a security issue in Keddy, please report it privately rather than opening a public GitHub issue.
 
-1. **Do not** open a public issue
-2. Email: emire.aksay@gmail.com
-3. Include a description, steps to reproduce, and potential impact
+**Email:** emire.aksay@gmail.com
 
-We will respond within 48 hours and work on a fix promptly.
+Include:
+
+- A description of the issue and its impact
+- Steps to reproduce
+- A proof of concept if you have one
+- Whether you believe it's exploitable in the default Keddy configuration
+
+We'll acknowledge receipt within 48 hours and keep you updated as we work through it. Once a fix ships, we'll credit you in the release notes unless you ask us not to.
 
 ## Scope
 
-Keddy stores session data locally in SQLite. Security considerations include:
-- SQL injection in search queries (mitigated via parameterized queries + FTS5 sanitization)
-- File path traversal in JSONL parsing
-- API key storage in config files (not in database)
+Keddy is local-first. The threat model is narrow but real.
+
+**In scope**
+
+- SQL injection in search or any dashboard API route
+- Path traversal in JSONL parsing
+- API key leakage from `~/.keddy/config.json`
+- Dashboard request smuggling, CSRF, or XSS (including SVG-borne)
+- Hook-handler command injection
+- Any vulnerability that turns session capture into code execution
+
+**Out of scope**
+
+- Physical access to the user's machine (cold-boot, disk forensics)
+- Attacks that require the user to install a malicious Keddy build from somewhere other than npm
+- DoS against the local dashboard from localhost
+
+## Responsible disclosure
+
+Please don't disclose publicly until we've shipped a fix. We'll coordinate timing with you.
