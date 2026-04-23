@@ -34,18 +34,6 @@ Every agentic session leaves a JSONL trail. Endless possibilities inside each ex
 
 Four Claude Code hooks feed a local session reader that parses the transcript and writes to a SQLite database on your machine. The database serves two surfaces: MCP tools Claude can call to pull context, and a dashboard you open in your browser to review sessions visually. See [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md) for the deeper technical breakdown.
 
-## Quick start
-
-```bash
-npm install -g keddy
-keddy init
-keddy open
-```
-
-Or run once without installing: `npx keddy init`
-
-`keddy init` installs four Claude Code hooks, creates a local database at `~/.keddy/keddy.db`, and registers the MCP server. Every session you run in Claude Code from that point forward is captured automatically.
-
 ## MCP tools
 
 Keddy registers as an MCP server during `keddy init`, giving Claude tools to reach back into your history. Together they cover everything an agent needs: **find** something across any session, **read** it in detail, and **understand** any context — a session, an exchange, a plan, a file.
@@ -135,6 +123,18 @@ Before synthesizing the day, Keddy backfills any missing session notes for it �
 Activity analysis breaks a session into its natural pieces — planning, implementing, testing, debugging, pivots — and writes a detailed summary for each. Equipped with these section summaries, you can scan a long session the way you'd scan chapters of a book, jumping straight to the part that matters: a specific plan iteration, the moment an approach changed, a long debugging detour. They complement session notes — where a session note tells the overall story, activity analysis gives per-phase depth.
 
 The agent uses the same Agent SDK + MCP pattern as session notes, with Keddy's detected boundaries as context rather than a required grouping. The agent decides how to carve the session and writes each piece freely.
+
+## Quick start
+
+```bash
+npm install -g keddy
+keddy init
+keddy open
+```
+
+Or run once without installing: `npx keddy init`
+
+`keddy init` installs four Claude Code hooks, creates a local database at `~/.keddy/keddy.db`, and registers the MCP server. Every session you run in Claude Code from that point forward is captured automatically.
 
 ## CLI reference
 
