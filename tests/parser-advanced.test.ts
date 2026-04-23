@@ -87,8 +87,9 @@ describe("parseTranscript — multi-turn assistant text accumulation", () => {
     expect(result.exchanges.length).toBe(1);
 
     const exchange = result.exchanges[0];
-    // Should contain text from ALL three assistant messages
-    expect(exchange.assistant_response).toContain("Let me look at the login code first");
+    // Text before the first tool call lands in assistant_response_pre;
+    // text after tool calls lands in assistant_response.
+    expect(exchange.assistant_response_pre).toContain("Let me look at the login code first");
     expect(exchange.assistant_response).toContain("I see the issue");
     expect(exchange.assistant_response).toContain("login function has been fixed");
   });
