@@ -77,32 +77,22 @@ Plans show status transitions (drafted → rejected → revised → approved →
 
 ## Optional AI analysis
 
-Keddy's core — capture, full-text search, plan tracking, git events — runs programmatically. AI is an opt-in layer for session notes, daily notes, activity analysis, and session titles. Bring your own key.
+Keddy's core — capture, full-text search, plan tracking, git events — runs programmatically. AI is an opt-in layer for session notes, daily notes, and activity analysis. Bring your own Anthropic API key.
 
 ```bash
 keddy config set analysis.enabled true
 keddy config set analysis.apiKey sk-ant-...
 ```
 
-Your key stays in `~/.keddy/config.json`. Supports Anthropic or any OpenAI-compatible endpoint.
+Your key stays in `~/.keddy/config.json`.
 
-<details>
-<summary><b>Models used for each feature</b></summary>
+Each feature runs on Claude Sonnet by default, and can be swapped to Haiku (faster) or Opus (highest quality) from the dashboard's Settings page or via `keddy config set notes.sessionModel <model>`.
 
-<br>
-
-| Feature | Default model | What it produces |
-|---|---|---|
-| Session notes | Claude Sonnet | Full per-session write-up |
-| Daily notes | Claude Sonnet | Per-day synthesis across sessions |
-| Activity analysis | Claude Sonnet | Per-section breakdowns within a session |
-| Session titles | Claude Haiku | Descriptive session titles |
-| Segment summaries | Claude Haiku | Short summaries of activity segments |
-| Decision extraction | Claude Haiku | Key technical decisions surfaced |
-
-Each feature can be toggled and its model overridden independently.
-
-</details>
+| Feature | What it produces |
+|---|---|
+| Session notes | Full per-session write-up |
+| Daily notes | Per-day synthesis across sessions |
+| Activity analysis | Per-section breakdowns within a session |
 
 ## Session notes
 
