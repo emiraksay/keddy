@@ -300,7 +300,7 @@ describe("split content blocks (real Claude Code format)", () => {
     expect(result.exchanges[0].tool_calls.length).toBe(2);
     expect(result.exchanges[0].tool_calls[0].name).toBe("Read");
     expect(result.exchanges[0].tool_calls[1].name).toBe("Read");
-    expect(result.exchanges[0].assistant_response).toContain("I'll read the file");
+    expect(result.exchanges[0].assistant_response_pre).toContain("I'll read the file");
     expect(result.exchanges[0].assistant_response).toContain("The project has two files");
   });
 
@@ -314,9 +314,11 @@ describe("split content blocks (real Claude Code format)", () => {
 
   it("should accumulate all text across split assistant entries", () => {
     const result = parseTranscript(join(FIXTURES, "sample-split-blocks.jsonl"));
-    // Exchange 0 has text from TWO separate assistant entries (line 4 + line 9)
+    // Exchange 0 has text from TWO separate assistant entries (line 4 + line 9).
+    // Pre-tool text lands in assistant_response_pre; post-tool text lands in assistant_response.
+    const pre = result.exchanges[0].assistant_response_pre;
     const resp = result.exchanges[0].assistant_response;
-    expect(resp).toContain("I'll read the file");
+    expect(pre).toContain("I'll read the file");
     expect(resp).toContain("index.ts");
     expect(resp).toContain("utils.ts");
   });
