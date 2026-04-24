@@ -23,9 +23,7 @@ Every agentic session leaves a JSONL trail. Endless possibilities inside each ex
 - You reach back through a **local dashboard** — timelines, plan versions, and milestones, all in your browser at `localhost:3737`.
 - **Nothing leaves your machine.** No telemetry, no cloud sync; optional AI agents use your own API key.
 
-<p align="center">
-  <video src="https://github.com/emiraksay/keddy/releases/download/v0.1.1/keddy-demo.mp4" controls width="100%"></video>
-</p>
+https://github.com/user-attachments/assets/3cdc8fb4-653a-40f6-a9c8-24e36c149664
 
 ## How Keddy Works
 
