@@ -45,9 +45,9 @@ src/
 
 - **Published**: https://www.npmjs.com/package/keddy
 - **Owner**: `emiraksay` on npm
-- **Release flow**: Tag with `vX.Y.Z` → GitHub Actions runs tests + publishes to npm automatically
-- **Manual publish**: `npm publish --access public` (runs tests + build via prepublishOnly)
-- **GitHub secret needed**: `NPM_TOKEN` in repo settings for automated releases
+- **Release flow**: Currently manual — `npm publish --access public` runs tests + build via `prepublishOnly`, then publishes
+- **Tagging**: After a successful publish, tag the release commit with `git tag vX.Y.Z && git push --tags`
+- **Future**: A `publish.yml` workflow that publishes automatically on tag push has not been added yet
 
 ## Key Conventions
 

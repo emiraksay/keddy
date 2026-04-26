@@ -73,7 +73,7 @@ Usage:
   keddy version    Show version
   keddy help       Show this help
 
-Documentation: https://github.com/emireaksay-8867/keddy
+Documentation: https://github.com/emiraksay/keddy
 `);
 }
 

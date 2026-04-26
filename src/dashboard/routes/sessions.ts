@@ -333,6 +333,7 @@ sessionsRoutes.get("/", (c) => {
             index: e.exchange_index,
             user_prompt: e.user_prompt,
             assistant_response: e.assistant_response,
+            assistant_response_pre: e.assistant_response_pre ?? "",
             tool_calls: tcs,
             timestamp: e.timestamp,
             is_interrupt: !!e.is_interrupt,
@@ -568,6 +569,7 @@ sessionsRoutes.get("/:id", (c) => {
         index: e.exchange_index,
         user_prompt: e.user_prompt,
         assistant_response: e.assistant_response,
+        assistant_response_pre: e.assistant_response_pre ?? "",
         tool_calls: (() => {
           try {
             const db = getDb();

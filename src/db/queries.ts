@@ -913,6 +913,7 @@ export function getProjectStatus(projectPath: string): {
     plan_text: string;
     status: string;
     user_feedback: string | null;
+    created_at: string;
   } | null;
   planHistory: Array<{
     version: number;

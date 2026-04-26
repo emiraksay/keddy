@@ -41,6 +41,7 @@ analyzeRoutes.post("/sessions/:id/analyze", async (c) => {
       index: e.exchange_index,
       user_prompt: e.user_prompt,
       assistant_response: e.assistant_response,
+      assistant_response_pre: (e as any).assistant_response_pre ?? "",
       tool_calls: tools.map((tc: any) => ({
         name: tc.name,
         input: (() => { try { return JSON.parse(tc.input); } catch { return tc.input; } })(),
@@ -159,6 +160,7 @@ analyzeRoutes.post("/analyze/bulk", async (c) => {
           index: e.exchange_index,
           user_prompt: e.user_prompt,
           assistant_response: e.assistant_response,
+          assistant_response_pre: (e as any).assistant_response_pre ?? "",
           tool_calls: tools.map((tc: any) => ({
             name: tc.name,
             input: (() => { try { return JSON.parse(tc.input); } catch { return tc.input; } })(),

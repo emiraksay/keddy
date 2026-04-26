@@ -14,7 +14,7 @@ interface ProjectView {
 }
 
 // Known orgs — GitHub org folders that contain repos
-const KNOWN_ORGS = ["LIVAD-Technologies"];
+const KNOWN_ORGS: string[] = [];
 
 function parseProjectPath(projectPath: string): { org: string; repo: string } {
   const parts = projectPath.split("/");

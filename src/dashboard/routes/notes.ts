@@ -168,7 +168,7 @@ notesRoutes.post("/sessions/:id/notes/generate", async (c) => {
 
   const config = loadConfig();
   const body = await c.req.json().catch(() => ({}));
-  const apiKey = body.apiKey || config.analysis?.apiKey || undefined;
+  const apiKey = config.analysis?.apiKey || undefined;
   const model = body.model || undefined;
 
   return streamSSE(c, async (stream) => {
