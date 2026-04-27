@@ -1,5 +1,10 @@
 # Changelog
 
+## [0.1.2] - 2026-04-27
+
+### Changed
+- README copy updates
+
 ## [0.1.0] - 2024-03-21
 
 ### Added
