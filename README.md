@@ -67,13 +67,13 @@ Example prompts:
 
 Exchanges are the turn-by-turn record of every session — every user prompt, every Claude response, every tool call, rendered as a navigable timeline. Equipped with this timeline, you can walk through any session one turn at a time: the moment you asked a question, the moment Claude pivoted, the exact tool error that triggered a retry. No scrolling a raw transcript.
 
-The timeline surfaces segments (planning, implementing, debugging, testing), plan transitions, git events, and compaction points inline — so the session's shape is visible, not just its content.
+The timeline shows plan transitions, git events (commits, pushes, PRs, branch changes), interruptions, and compaction points inline alongside each exchange, with tool calls broken down by type (Read 6, Edit 3, Bash 2…). Search runs across prompts, tool names, file paths, bash commands, and skill calls. Sort by oldest or newest. Expand any card to see the full conversation flow with thinking blocks, text, and grouped tool results.
 
 ## Plans
 
 Plans are the versioned history of every plan your agent drafted, revised, or rejected — with the exact feedback you gave each time. Equipped with this history, you can see how a plan evolved from draft to implementation: which approach you tried first, why you rejected it, what the next version corrected, which version finally got approved and built. It's the record that would otherwise live only in a scroll-through transcript.
 
-Plans show status transitions (drafted → rejected → revised → approved → implemented), your feedback at each rejection, and the tasks created and completed under each approved plan. Pullable through `keddy_get_plans`.
+Each plan card shows your exact feedback at every revision, the tasks created and completed under it, and the git commits and PRs that landed under its scope. Status is derived from facts, not assigned: a plan is `approved` or `rejected` based on what you actually said in plan mode, and `revised` when your feedback led to a new version. Pullable through `keddy_get_plans`.
 
 ## Optional AI analysis
 
