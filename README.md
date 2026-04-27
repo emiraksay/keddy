@@ -71,9 +71,9 @@ The timeline shows plan transitions, git events (commits, pushes, PRs, branch ch
 
 ## Plans
 
-Plans are the versioned history of every plan your agent drafted, revised, or rejected — with the exact feedback you gave each time. Equipped with this history, you can see how a plan evolved from draft to implementation: which approach you tried first, why you rejected it, what the next version corrected, which version finally got approved and built. It's the record that would otherwise live only in a scroll-through transcript.
+Plans are what your agent drafts when it enters plan mode: a structured proposal of what it intends to do before any code changes. Keddy keeps every version, the feedback you gave between them, and the prompt that triggered each new one. From first draft to final approval, the full thread stays available.
 
-Each plan card shows your exact feedback at every revision, the tasks created and completed under it, and the git commits and PRs that landed under its scope. Status is derived from facts, not assigned: a plan is `approved` or `rejected` based on what you actually said in plan mode, and `revised` when your feedback led to a new version. Pullable through `keddy_get_plans`.
+Each plan card shows your exact feedback at every revision, the tasks created and completed under it, and the git commits and PRs that landed under its scope. Status comes from facts: a plan is `approved` or `rejected` based on what you said in plan mode, and `revised` when your feedback led to a new version. Pullable through `keddy_get_plans` and visible through the dashboard.
 
 ## Optional AI analysis
 
@@ -314,15 +314,6 @@ npm run dev           # Watch mode for CLI + dashboard + server
 ```
 
 See [`CONTRIBUTING.md`](CONTRIBUTING.md) for the full development workflow, PR process, and coding standards.
-
-## Acknowledgments
-
-Keddy wouldn't exist without:
-
-- [Claude Code](https://docs.claude.com/en/docs/claude-code/overview) — the hooks and MCP APIs that make every part of this possible.
-- [@modelcontextprotocol/sdk](https://github.com/modelcontextprotocol/typescript-sdk) — the TypeScript MCP library Keddy builds on.
-- [better-sqlite3](https://github.com/WiseLibs/better-sqlite3), [Hono](https://hono.dev), [Vite](https://vitejs.dev), and [Tailwind CSS](https://tailwindcss.com) — the fast, boring infrastructure that lets us focus on the interesting parts.
-- [Serena](https://github.com/oraios/serena) — the reference point for what a thoughtful open-source agent tool looks like.
 
 ## License
 
