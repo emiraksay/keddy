@@ -1,20 +1,26 @@
 # Changelog
 
+All notable changes to Keddy are listed here.
+
 ## [0.1.2] - 2026-04-27
 
 ### Changed
-- README copy updates
+- Restructured the README around what each surface gives the user: exchanges, plans, notes, daily notes, activity analysis, dashboard, and the MCP tools.
+- Embedded the hero demo video natively via GitHub attachments.
 
-## [0.1.0] - 2024-03-21
+### Fixed
+- Pre-launch capture, parsing, and dashboard fixes.
+
+## [0.1.1] - 2026-04-23
+
+Initial public release.
 
 ### Added
-- JSONL transcript parser with support for tool calls, plan mode, compaction, interrupts
-- SQLite database with FTS5 full-text search
-- Programmatic analysis: segments, plans, milestones
-- 4 Claude Code hooks (SessionStart, Stop, PostCompact, SessionEnd)
-- CLI: init, open, status, config, import
-- MCP server with 4 session intelligence tools
-- Dashboard API (Hono) with session, plan, stats, config routes
-- React dashboard with session list, timeline, plan viewer, settings
-- Optional AI analysis layer (titles, summaries, decisions)
-- Comprehensive test suite with integration tests
+- Capture pipeline running off four Claude Code hooks, writing to a local SQLite database with FTS5 full-text search.
+- 11 MCP tools, all exposed by default, covering session search, session reading at varying depth, plan version history, file lookups, project status, recent activity, and saved session and daily notes.
+- Local dashboard at `localhost:3737` with Activity, Plans, and Notes tabs.
+- Optional AI layer (session notes, daily notes, activity analysis) using your own Anthropic API key. Off by default.
+- CLI: `init`, `open`, `status`, `import`, `reimport`, `backfill`, `config`, `version`, `help`.
+
+### Security
+- Dashboard hardened against CSRF, SQL injection, and SVG-based XSS before public release.
