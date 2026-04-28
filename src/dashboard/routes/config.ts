@@ -128,7 +128,7 @@ configRoutes.get("/system", (c) => {
     hooksInstalled,
     hookDetails,
     dbPath,
-    github: "https://github.com/emireaksay-8867/keddy",
+    github: "https://github.com/emiraksay/keddy",
     npm: "https://www.npmjs.com/package/keddy",
   });
 });

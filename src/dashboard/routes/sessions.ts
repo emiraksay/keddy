@@ -181,7 +181,7 @@ sessionsRoutes.get("/", (c) => {
     // Apply project filter — match exact path, repo directory name, or worktree repo name
     if (project) {
       const repoName = project.split("/").pop() || project;
-      // Also extract worktree repo name from filter path (e.g. .../worktrees/mano/branch → mano)
+      // Also extract worktree repo name from filter path (e.g. .../worktrees/myrepo/branch → myrepo)
       const filterParts = project.split("/");
       const filterWtIdx = filterParts.indexOf("worktrees");
       const filterWtRepo = filterWtIdx >= 0 ? filterParts[filterWtIdx + 1] : null;
