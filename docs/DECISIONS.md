@@ -6,7 +6,7 @@ This doc explains the big architectural and product choices behind Keddy. For *h
 
 Keddy captures and organizes sessions after they happen. It does not inject context into Claude's prompts.
 
-The memory-tool space (Mem0, Zep, Claude-Mem) competes with Claude Code's built-in compaction by stuffing retrieved context back into the system prompt. That's a different product. Session intelligence is structured recall on demand — you or your agent decide what to pull, when. Sessions are the richest unit of context Claude Code produces (plans with your feedback, exchanges with tool calls, git events), and memory summaries throw most of that away.
+The memory-tool space competes with Claude Code's built-in compaction by stuffing retrieved context back into the system prompt. That's a different product. Session intelligence is structured recall on demand — you or your agent decide what to pull, when. Sessions are the richest unit of context Claude Code produces (plans with your feedback, exchanges with tool calls, git events), and memory summaries throw most of that away.
 
 ## Programmatic-first, AI-optional
 
