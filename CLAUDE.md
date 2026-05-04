@@ -11,34 +11,44 @@ src/
 ├── types.ts           # Shared TypeScript interfaces
 ├── db/                # SQLite database layer (better-sqlite3)
 │   ├── index.ts       # initDb(), getDb(), closeDb()
-│   ├── schema.ts      # 9 tables + FTS5 + triggers
+│   ├── schema.ts      # 12 tables + exchanges_fts (FTS5) + config + triggers
+│   ├── migrations.ts  # Versioned schema migrations
 │   └── queries.ts     # Prepared statements for all operations
 ├── capture/           # Session capture pipeline
 │   ├── parser.ts      # JSONL transcript parser
 │   ├── handler.ts     # Hook entry point (reads stdin, routes by event)
 │   ├── plans.ts       # Plan extraction (EnterPlanMode/ExitPlanMode)
 │   ├── segments.ts    # Segment detection (sliding window)
+│   ├── activity-groups.ts # Activity group + boundary detection
 │   ├── milestones.ts  # Milestone regex (git commit/push/PR/branch/test)
+│   ├── tasks.ts       # TaskCreate/TaskUpdate extraction
+│   ├── titles.ts      # Title derivation from first user prompt
 │   └── github.ts      # Git remote URL parsing + URL construction
-├── mcp/               # MCP server (4 tools via StdioServerTransport)
-│   └── server.ts
+├── mcp/               # MCP server (11 tools)
+│   ├── server.ts      # Stdio entry point
+│   └── tools.ts       # Tool definitions (createKeddyMcpServer)
 ├── cli/               # CLI commands
 │   ├── index.ts       # Entry point with command router
 │   ├── init.ts        # Hook installation + DB init
 │   ├── open.ts        # Dashboard server + browser open
 │   ├── status.ts      # Health check
 │   ├── config.ts      # Read/write ~/.keddy/config.json
-│   └── import.ts      # Historical session import
+│   ├── import.ts      # Historical session import
+│   └── backfill.ts    # Re-parse existing sessions to latest schema
 ├── dashboard/         # Hono API + React frontend
 │   ├── server.ts      # Hono app, port 3737
-│   ├── routes/        # API routes
+│   ├── server-dev.ts  # Dev entry alongside Vite
+│   ├── routes/        # API routes (sessions, plans, notes, daily, projects, stats, analyze, config)
 │   └── app/           # React SPA (Vite + Tailwind v4)
 └── analysis/          # Optional AI analysis layer
-    ├── index.ts       # Orchestrator
-    ├── providers.ts   # Anthropic / OpenAI-compatible
-    ├── titles.ts      # AI session titles
-    ├── summaries.ts   # AI segment summaries
-    └── decisions.ts   # AI decision extraction
+    ├── index.ts            # Orchestrator
+    ├── providers.ts        # Anthropic / OpenAI-compatible
+    ├── titles.ts           # AI session titles
+    ├── summaries.ts        # AI segment summaries
+    ├── decisions.ts        # AI decision extraction
+    ├── agent.ts            # Session notes generator (Agent SDK + in-process MCP)
+    ├── daily-agent.ts      # Daily notes generator
+    └── mermaid-generator.ts # Programmatic mermaid diagrams (no AI)
 ```
 
 ## npm Package
@@ -59,7 +69,7 @@ src/
 
 ## Database Schema
 
-9 tables: sessions, exchanges, tool_calls, plans, segments, milestones, decisions, compaction_events, session_links. Plus `exchanges_fts` (FTS5) and `config` (key-value).
+12 tables: `sessions`, `exchanges`, `tool_calls`, `plans`, `segments`, `milestones`, `decisions`, `compaction_events`, `tasks`, `session_links`, `session_notes`, `daily_notes`. Plus `exchanges_fts` (FTS5 virtual table over user_prompt + assistant_response, kept in sync via triggers) and `config` (key-value store). `decisions` is populated by the opt-in AI analysis layer; `session_notes` and `daily_notes` are populated by the AI notes generators.
 
 ## How Hooks Work
 
