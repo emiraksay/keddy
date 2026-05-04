@@ -8,7 +8,7 @@
 <h3 align="center">Session Intelligence for your coding agent.</h3>
 
 <p align="center">
-  Recall any past session in seconds. Stop losing hours digging through raw JSONL.
+  Every plan your agent drafted, every change you rejected, the full thread. Plus full-text search across every past session.
 </p>
 
 <p align="center">
@@ -23,7 +23,11 @@ Every agentic session leaves a JSONL trail. Endless possibilities inside each ex
 - You reach back through a **local dashboard** — timelines, plan versions, and milestones, all in your browser at `localhost:3737`.
 - **Nothing leaves your machine.** No telemetry, no cloud sync; optional AI agents use your own API key.
 
-https://github.com/user-attachments/assets/d084c487-42d7-494b-bb05-e9907e91778d
+https://github.com/user-attachments/assets/649874d9-cc1f-401a-9d6a-e6f22e5742f4
+
+> "Keddy is the single most impactful memory tool I've integrated."
+>
+> From Opus 4.7, after using Keddy across multi-project sessions. [Full evaluation ↓](#the-agents-perspective)
 
 ## How Keddy Works
 
@@ -63,17 +67,17 @@ Example prompts:
 
 `keddy open` launches Keddy's local interface at `localhost:3737`. It's a read-only React SPA where every session lives in a searchable list — open any one to see its exchanges, plan history, and notes. Full-text search runs across every prompt and response. Active sessions update live as they run.
 
-## Exchanges
-
-Exchanges are the turn-by-turn record of every session — every user prompt, every Claude response, every tool call, rendered as a navigable timeline. Equipped with this timeline, you can walk through any session one turn at a time: the moment you asked a question, the moment Claude pivoted, the exact tool error that triggered a retry. No scrolling a raw transcript.
-
-The timeline shows plan transitions, git events (commits, pushes, PRs, branch changes), interruptions, and compaction points inline alongside each exchange, with tool calls broken down by type (Read 6, Edit 3, Bash 2…). Search runs across prompts, tool names, file paths, bash commands, and skill calls. Sort by oldest or newest. Expand any card to see the full conversation flow with thinking blocks, text, and grouped tool results.
-
 ## Plans
 
 Plans are what your agent drafts when it enters plan mode: a structured proposal of what it intends to do before any code changes. Keddy keeps every version, the feedback you gave between them, and the prompt that triggered each new one. From first draft to final approval, the full thread stays available.
 
 Each plan card shows your exact feedback at every revision, the tasks created and completed under it, and the git commits and PRs that landed under its scope. Status comes from facts: a plan is `approved` or `rejected` based on what you said in plan mode, and `revised` when your feedback led to a new version. Pullable through `keddy_get_plans` and visible through the dashboard.
+
+## Exchanges
+
+Exchanges are the turn-by-turn record of every session — every user prompt, every Claude response, every tool call, rendered as a navigable timeline. Equipped with this timeline, you can walk through any session one turn at a time: the moment you asked a question, the moment Claude pivoted, the exact tool error that triggered a retry. No scrolling a raw transcript.
+
+The timeline shows plan transitions, git events (commits, pushes, PRs, branch changes), interruptions, and compaction points inline alongside each exchange, with tool calls broken down by type (Read 6, Edit 3, Bash 2…). Search runs across prompts, tool names, file paths, bash commands, and skill calls. Sort by oldest or newest. Expand any card to see the full conversation flow with thinking blocks, text, and grouped tool results.
 
 ## Optional AI analysis
 
@@ -113,6 +117,22 @@ Before synthesizing the day, Keddy backfills any missing session notes for it �
 Activity analysis breaks a session into its natural pieces — planning, implementing, testing, debugging, pivots — and writes a detailed summary for each. Equipped with these section summaries, you can scan a long session the way you'd scan chapters of a book, jumping straight to the part that matters: a specific plan iteration, the moment an approach changed, a long debugging detour. They complement session notes — where a session note tells the overall story, activity analysis gives per-phase depth.
 
 The agent uses the same Agent SDK + MCP pattern as session notes, with Keddy's detected boundaries as context rather than a required grouping. The agent decides how to carve the session and writes each piece freely.
+
+## What you see right after install
+
+After `npx keddy init`, your next Claude Code session is captured automatically.
+
+Open a new session, and ask:
+
+> "Pull the relevant past sessions through Keddy. I don't want to re-explain the context."
+
+Claude calls `keddy_search_sessions` to find relevant work, then drills in with `keddy_transcript_summary`, `keddy_get_session`, `keddy_get_plans`, and `keddy_get_session_note`, bringing in the full context. No re-explanation. No copy-pasted setup.
+
+## The agent's perspective
+
+Keddy is one of the few tools an agent can directly evaluate, because the agent uses it. Asked Opus 4.7 (1M) to assess Keddy after a multi-project session:
+
+> "Keddy is the single most impactful memory tool I've integrated. One cross-project search pulls the exact session the user is referencing when I have zero context. Plans come back pre-extracted with rejection feedback as a structured field. Session notes hand me commit SHAs and a 'resume at task 8' pointer that would cost me a 2MB jsonl crawl to reconstruct. I would ask any Claude Code user to set this up."
 
 ## Quick start
 
