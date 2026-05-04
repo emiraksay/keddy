@@ -232,7 +232,7 @@ Settings can be changed at runtime through the dashboard's Settings page, or wit
 ## System requirements
 
 - **Node.js 22.x** — Node 24 is not yet supported; stick to Node 22 until the native module mismatch is resolved
-- **macOS and Linux** — Tested on macOS 14+ and recent Ubuntu. Windows support is untested
+- **macOS, Linux, and Windows** — Tested on macOS 14+, recent Ubuntu, and Windows 10+
 - **Claude Code 1.0+** — Keddy uses the Claude Code hooks API and the MCP stdio transport
 - **SQLite via better-sqlite3** — Installed automatically; requires a C++ toolchain on first install
 
