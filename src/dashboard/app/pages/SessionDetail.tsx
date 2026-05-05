@@ -243,15 +243,6 @@ export function SessionDetail() {
               ))}
             </div>
           </div>
-          <div className="shrink-0">
-            {analyzing ? (
-              <span className="text-[11px]" style={{ color: "var(--accent)" }}>{analyzeStep}</span>
-            ) : (
-              <button onClick={runAnalysis} className="text-[11px] px-2.5 py-1 rounded hover:opacity-90 transition-colors font-medium" style={{ background: "var(--accent)", color: "white", border: "none" }}>
-                Keddy Analyze
-              </button>
-            )}
-          </div>
         </div>
         {session.parent_title && (
           <div className="mt-1.5">
